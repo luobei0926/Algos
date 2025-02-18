@@ -22,17 +22,20 @@ from typing import List
 class Solution:
     def moveZeroes(self, nums: List[int]) -> None:
         """
+        左指针左边均为非零数；
+
+        右指针左边直到左指针处均为零。
         :param nums:
         :return:
         """
-
-        left = 0
-        for i in range(1, len(nums)):
-            if nums[left] != 0 and left == 0 and nums[i] == 0:
-                left = i
+        left = right = 0
+        n = len(nums)
+        for i in range(n):
             if nums[i] != 0:
-                nums[left], nums[i] = nums[i], nums[left]
-                left += 1#注意不是left = i,这样很容易跳过中间的0
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+            right += 1
+
         return nums
 
 
